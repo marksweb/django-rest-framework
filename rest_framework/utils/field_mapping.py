@@ -57,9 +57,9 @@ def get_detail_view_name(model):
     Given a model class, return the view name to use for URL relationships
     that refer to instances of the model.
     """
-    return '%(model_name)s-detail' % {
-        'model_name': model._meta.object_name.lower()
-    }
+    return '{model_name}-detail'.format(
+        model_name=model._meta.object_name.lower()
+    )
 
 
 def get_field_kwargs(field_name, model_field):

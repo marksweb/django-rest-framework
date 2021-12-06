@@ -3,7 +3,6 @@ import os
 import re
 import shutil
 import sys
-from io import open
 
 from setuptools import find_packages, setup
 
@@ -37,7 +36,7 @@ an older version of Django REST Framework:
 
 
 def read(f):
-    return open(f, 'r', encoding='utf-8').read()
+    return open(f, encoding='utf-8').read()
 
 
 def get_version(package):
@@ -62,7 +61,7 @@ if sys.argv[-1] == 'publish':
         sys.exit()
     os.system("twine upload dist/*")
     print("You probably want to also tag the version now:")
-    print("  git tag -a %s -m 'version %s'" % (version, version))
+    print(f"  git tag -a {version} -m 'version {version}'")
     print("  git push --tags")
     shutil.rmtree('dist')
     shutil.rmtree('build')

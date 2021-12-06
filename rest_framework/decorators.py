@@ -199,7 +199,7 @@ class MethodMapper(dict):
 
     def _map(self, method, func):
         assert method not in self, (
-            "Method '%s' has already been mapped to '.%s'." % (method, self[method]))
+            f"Method '{method}' has already been mapped to '.{self[method]}'.")
         assert func.__name__ != self.action.__name__, (
             "Method mapping does not behave like the property decorator. You "
             "cannot use the same method name for each mapping declaration.")

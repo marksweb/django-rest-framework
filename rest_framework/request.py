@@ -180,7 +180,7 @@ class Request:
             self.authenticators = (forced_auth,)
 
     def __repr__(self):
-        return '<%s.%s: %s %r>' % (
+        return '<{}.{}: {} {!r}>'.format(
             self.__class__.__module__,
             self.__class__.__name__,
             self.method,

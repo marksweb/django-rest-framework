@@ -1,5 +1,3 @@
-import sys
-
 import pytest
 from django.test import TestCase
 
@@ -164,10 +162,7 @@ class TestViewNamesAndDescriptions(TestCase):
         Ensure markdown to HTML works as expected.
         """
         # Markdown 3.3 is only supported on Python 3.6 and higher
-        if sys.version_info >= (3, 6):
-            assert apply_markdown(DESCRIPTION) == MARKDOWN_BASE % MARKDOWN_gte_33
-        else:
-            assert apply_markdown(DESCRIPTION) == MARKDOWN_BASE % MARKDOWN_lt_33
+        assert apply_markdown(DESCRIPTION) == MARKDOWN_BASE % MARKDOWN_gte_33
 
 
 def test_dedent_tabs():

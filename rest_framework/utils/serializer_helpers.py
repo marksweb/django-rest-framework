@@ -71,7 +71,7 @@ class BoundField:
         return self._field.__class__
 
     def __repr__(self):
-        return '<%s value=%s errors=%s>' % (
+        return '<{} value={} errors={}>'.format(
             self.__class__.__name__, self.value, self.errors
         )
 

@@ -92,7 +92,7 @@ class ViewSetMixin:
                                 "keyword argument to %s(). Don't do that."
                                 % (key, cls.__name__))
             if not hasattr(cls, key):
-                raise TypeError("%s() received an invalid keyword %r" % (
+                raise TypeError("{}() received an invalid keyword {!r}".format(
                     cls.__name__, key))
 
         # name and suffix are mutually exclusive
@@ -158,7 +158,7 @@ class ViewSetMixin:
         """
         Reverse the action for the given `url_name`.
         """
-        url_name = '%s-%s' % (self.basename, url_name)
+        url_name = f'{self.basename}-{url_name}'
         namespace = None
         if self.request and self.request.resolver_match:
             namespace = self.request.resolver_match.namespace
@@ -197,7 +197,7 @@ class ViewSetMixin:
 
         for action in actions:
             try:
-                url_name = '%s-%s' % (self.basename, action.url_name)
+                url_name = f'{self.basename}-{action.url_name}'
                 url = reverse(url_name, self.args, self.kwargs, request=self.request)
                 view = self.__class__(**action.kwargs)
                 action_urls[view.get_view_name()] = url

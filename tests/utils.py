@@ -10,7 +10,7 @@ class MockObject:
 
     def __str__(self):
         kwargs_str = ', '.join([
-            '%s=%s' % (key, value)
+            f'{key}={value}'
             for key, value in sorted(self._kwargs.items())
         ])
         return '<MockObject %s>' % kwargs_str
@@ -49,7 +49,7 @@ def mock_reverse(view_name, args=None, kwargs=None, request=None, format=None):
     value = (args + list(kwargs.values()) + ['-'])[0]
     prefix = 'http://example.org' if request else ''
     suffix = ('.' + format) if (format is not None) else ''
-    return '%s/%s/%s%s/' % (prefix, view_name, value, suffix)
+    return f'{prefix}/{view_name}/{value}{suffix}/'
 
 
 def fail_reverse(view_name, args=None, kwargs=None, request=None, format=None):

@@ -48,7 +48,7 @@ class UniqueValidator:
         """
         Filter the queryset to all instances matching the given attribute.
         """
-        filter_kwargs = {'%s__%s' % (field_name, self.lookup): value}
+        filter_kwargs = {f'{field_name}__{self.lookup}': value}
         return qs_filter(queryset, **filter_kwargs)
 
     def exclude_current_instance(self, queryset, instance):
@@ -74,7 +74,7 @@ class UniqueValidator:
             raise ValidationError(self.message, code='unique')
 
     def __repr__(self):
-        return '<%s(queryset=%s)>' % (
+        return '<{}(queryset={})>'.format(
             self.__class__.__name__,
             smart_repr(self.queryset)
         )
@@ -160,7 +160,7 @@ class UniqueTogetherValidator:
             raise ValidationError(message, code='unique')
 
     def __repr__(self):
-        return '<%s(queryset=%s, fields=%s)>' % (
+        return '<{}(queryset={}, fields={})>'.format(
             self.__class__.__name__,
             smart_repr(self.queryset),
             smart_repr(self.fields)
@@ -231,7 +231,7 @@ class BaseUniqueForValidator:
             }, code='unique')
 
     def __repr__(self):
-        return '<%s(queryset=%s, field=%s, date_field=%s)>' % (
+        return '<{}(queryset={}, field={}, date_field={})>'.format(
             self.__class__.__name__,
             smart_repr(self.queryset),
             smart_repr(self.field),

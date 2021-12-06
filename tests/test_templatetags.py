@@ -51,7 +51,7 @@ class TemplateTagTests(TestCase):
         url = 'http://url.com'
         name = 'name_of_url'
         hyperlink = Hyperlink(url, name)
-        self.assertEqual(format_value(hyperlink), '<a href=%s>%s</a>' % (url, name))
+        self.assertEqual(format_value(hyperlink), f'<a href={url}>{name}</a>')
 
     def test_format_value_list(self):
         """

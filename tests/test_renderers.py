@@ -204,7 +204,7 @@ class RendererEndToEndTests(TestCase):
     def test_specified_renderer_serializes_content_on_format_query(self):
         """If a 'format' query is specified, the renderer with the matching
         format attribute should serialize the response."""
-        param = '?%s=%s' % (
+        param = '?{}={}'.format(
             api_settings.URL_FORMAT_OVERRIDE,
             RendererB.format
         )
@@ -224,7 +224,7 @@ class RendererEndToEndTests(TestCase):
     def test_specified_renderer_is_used_on_format_query_with_matching_accept(self):
         """If both a 'format' query and a matching Accept header specified,
         the renderer with the matching format attribute should serialize the response."""
-        param = '?%s=%s' % (
+        param = '?{}={}'.format(
             api_settings.URL_FORMAT_OVERRIDE,
             RendererB.format
         )
@@ -409,7 +409,7 @@ class UnicodeJSONRendererTests(TestCase):
         obj = {'should_escape': '\u2028\u2029'}
         renderer = JSONRenderer()
         content = renderer.render(obj, 'application/json')
-        self.assertEqual(content, '{"should_escape":"\\u2028\\u2029"}'.encode())
+        self.assertEqual(content, b'{"should_escape":"\\u2028\\u2029"}')
 
 
 class AsciiJSONRendererTests(TestCase):
@@ -422,7 +422,7 @@ class AsciiJSONRendererTests(TestCase):
         obj = {'countries': ['United Kingdom', 'France', 'España']}
         renderer = AsciiJSONRenderer()
         content = renderer.render(obj, 'application/json')
-        self.assertEqual(content, '{"countries":["United Kingdom","France","Espa\\u00f1a"]}'.encode())
+        self.assertEqual(content, b'{"countries":["United Kingdom","France","Espa\\u00f1a"]}')
 
 
 # Tests for caching issue, #346

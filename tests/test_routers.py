@@ -406,9 +406,9 @@ class TestDynamicListAndDetailRouter(TestCase):
             url_path = endpoint.url_path
 
             if method_name.startswith('list_'):
-                assert route.url == '^{{prefix}}/{0}{{trailing_slash}}$'.format(url_path)
+                assert route.url == f'^{{prefix}}/{url_path}{{trailing_slash}}$'
             else:
-                assert route.url == '^{{prefix}}/{{lookup}}/{0}{{trailing_slash}}$'.format(url_path)
+                assert route.url == f'^{{prefix}}/{{lookup}}/{url_path}{{trailing_slash}}$'
             # check method to function mapping
             if method_name.endswith('_post'):
                 method_map = 'post'
@@ -447,14 +447,14 @@ class TestRegexUrlPath(URLPatternsTestCase, TestCase):
 
     def test_regex_url_path_list(self):
         kwarg = '1234'
-        response = self.client.get('/regex/list/{}/'.format(kwarg))
+        response = self.client.get(f'/regex/list/{kwarg}/')
         assert response.status_code == 200
         assert json.loads(response.content.decode()) == {'kwarg': kwarg}
 
     def test_regex_url_path_detail(self):
         pk = '1'
         kwarg = '1234'
-        response = self.client.get('/regex/{}/detail/{}/'.format(pk, kwarg))
+        response = self.client.get(f'/regex/{pk}/detail/{kwarg}/')
         assert response.status_code == 200
         assert json.loads(response.content.decode()) == {'pk': pk, 'kwarg': kwarg}
 

@@ -120,7 +120,7 @@ def _reverse_ordering(ordering_tuple):
     def invert(x):
         return x[1:] if x.startswith('-') else '-' + x
 
-    return tuple([invert(item) for item in ordering_tuple])
+    return tuple(invert(item) for item in ordering_tuple)
 
 
 Cursor = namedtuple('Cursor', ['offset', 'reverse', 'position'])

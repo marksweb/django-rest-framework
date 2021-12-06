@@ -93,7 +93,7 @@ class BasicAuthTests(TestCase):
 
     def test_post_form_passing_basic_auth(self):
         """Ensure POSTing json over basic auth with correct credentials passes and does not require CSRF"""
-        credentials = ('%s:%s' % (self.username, self.password))
+        credentials = (f'{self.username}:{self.password}')
         base64_credentials = base64.b64encode(
             credentials.encode(HTTP_HEADER_ENCODING)
         ).decode(HTTP_HEADER_ENCODING)
@@ -107,7 +107,7 @@ class BasicAuthTests(TestCase):
 
     def test_post_json_passing_basic_auth(self):
         """Ensure POSTing form over basic auth with correct credentials passes and does not require CSRF"""
-        credentials = ('%s:%s' % (self.username, self.password))
+        credentials = (f'{self.username}:{self.password}')
         base64_credentials = base64.b64encode(
             credentials.encode(HTTP_HEADER_ENCODING)
         ).decode(HTTP_HEADER_ENCODING)
@@ -167,7 +167,7 @@ class BasicAuthTests(TestCase):
         User.objects.create_user(
             username, email, password
         )
-        credentials = ('%s:%s' % (username, password))
+        credentials = (f'{username}:{password}')
         base64_credentials = base64.b64encode(
             credentials.encode('utf-8')
         ).decode(HTTP_HEADER_ENCODING)

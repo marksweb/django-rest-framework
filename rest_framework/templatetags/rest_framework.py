@@ -187,9 +187,9 @@ def add_class(value, css_class):
     html = str(value)
     match = class_re.search(html)
     if match:
-        m = re.search(r'^%s$|^%s\s|\s%s\s|\s%s$' % (css_class, css_class,
-                                                    css_class, css_class),
-                      match.group(1))
+        m = re.search(r'^{}$|^{}\s|\s{}\s|\s{}$'.format(
+            css_class, css_class, css_class, css_class
+        ), match.group(1))
         if not m:
             return mark_safe(class_re.sub(match.group(1) + " " + css_class,
                                           html))
@@ -202,7 +202,7 @@ def add_class(value, css_class):
 def format_value(value):
     if getattr(value, 'is_hyperlink', False):
         name = str(value.obj)
-        return mark_safe('<a href=%s>%s</a>' % (value, escape(name)))
+        return mark_safe(f'<a href={value}>{escape(name)}</a>')
     if value is None or isinstance(value, bool):
         return mark_safe('<code>%s</code>' % {True: 'true', False: 'false', None: 'null'}[value])
     elif isinstance(value, list):

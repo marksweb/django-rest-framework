@@ -19,7 +19,7 @@ def manager_repr(value):
     ]
     for manager_name, manager_instance in names_and_managers:
         if manager_instance == value:
-            return '%s.%s.all()' % (model._meta.object_name, manager_name)
+            return f'{model._meta.object_name}.{manager_name}.all()'
     return repr(value)
 
 
@@ -53,7 +53,7 @@ def field_repr(field, force_many=False):
 
     arg_string = ', '.join([smart_repr(val) for val in field._args])
     kwarg_string = ', '.join([
-        '%s=%s' % (key, smart_repr(val))
+        f'{key}={smart_repr(val)}'
         for key, val in sorted(kwargs.items())
     ])
     if arg_string and kwarg_string:
@@ -64,7 +64,7 @@ def field_repr(field, force_many=False):
     else:
         class_name = field.__class__.__name__
 
-    return "%s(%s%s)" % (class_name, arg_string, kwarg_string)
+    return f"{class_name}({arg_string}{kwarg_string})"
 
 
 def serializer_repr(serializer, indent, force_many=None):
